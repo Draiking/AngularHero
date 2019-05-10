@@ -1,15 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Hero} from '../models/hero';
+import {HEROES} from '../mock-heroes';
 
 @Component({
-  selector: 'app-heroes',
-  templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.scss', './style.components.scss']
+    selector: 'app-heroes',
+    templateUrl: './heroes.component.html',
+    styleUrls: ['./heroes.component.scss', './style.components.scss']
 })
 export class HeroesComponent implements OnInit {
 
-  constructor() { }
+    hero: Hero = {
+        id: 1,
+        name: 'Windstorm'
+    };
 
-  ngOnInit() {
-  }
+    heroes = HEROES;
+    selectedHero: Hero;
+
+    constructor() {
+    }
+
+    ngOnInit() {
+    }
+
+    onSelect(hero: Hero): void {
+        this.selectedHero = hero;
+        this.log(hero);
+    }
+
+    log(myString) {
+        console.log(myString);
+    }
 
 }
