@@ -32,4 +32,8 @@ export class HeroesComponent implements OnInit {
         console.log(myString);
     }
 
+    changeName(heroName) {
+        console.log(heroName);
+    }
+
 }
