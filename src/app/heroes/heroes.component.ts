@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Hero} from '../models/hero';
 import {HeroService} from '../hero.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-heroes',
@@ -8,43 +9,24 @@ import {HeroService} from '../hero.service';
     styleUrls: ['./heroes.component.scss', './style.components.scss']
 })
 export class HeroesComponent implements OnInit {
-
-    hero: Hero = {
-        id: 1,
-        name: 'Windstorm'
-    };
-
     heroes: Hero[];
-    selectedHero: Hero = this.hero;
 
-    constructor(
-        private heroService: HeroService,
+    constructor(private heroService: HeroService,
+                private router: Router,
     ) {
-
     }
 
     ngOnInit() {
-        this.getMyHeroes();
+        this.getHeroes();
     }
 
-    getMyHeroes(): void {
+    getHeroes(): void {
         this.heroService.getHeroes()
-            .subscribe((heroes) => {
-                this.heroes = heroes;
-            });
+            .subscribe(heroes => this.heroes = heroes);
     }
 
-    onSelect(hero: Hero): void {
-        this.selectedHero = hero;
-        this.log(hero);
+    onSelect(hero: Hero) {
+        /*this.router.navigateByUrl('detail/' + hero.id);*/
+        this.router.navigateByUrl(`detail/${hero.id}`);
     }
-
-    log(myString) {
-        console.log(myString);
-    }
-
-    changeName(heroName) {
-        console.log(heroName);
-    }
-
 }
